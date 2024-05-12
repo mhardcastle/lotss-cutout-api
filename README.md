@@ -22,5 +22,5 @@ degrees is left as an exercise for the reader.
 The example main
 function in `cutout.py` will download images of a list of objects from
 the server, storing them in FITS files in the working directory. If
-you run it on the provided input file `test.txt' it should download
+you run it on the provided input file `test.txt` it should download
 some images to demonstrate that the code is working.
