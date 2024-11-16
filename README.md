@@ -24,3 +24,7 @@ function in `cutout.py` will download images of a list of objects from
 the server, storing them in FITS files in the working directory. If
 you run it on the provided input file `test.txt` it should download
 some images to demonstrate that the code is working.
+
+`get_cutout()` can be used with LoTSS DR3 data by setting `dr3=True`.
+Before the DR3 public release you will need to supply a suitable
+username, password pair as a tuple to the `auth` argument.
