@@ -16,13 +16,18 @@ def get_cutout(outfile,pos,size=30,low=False,dr3=False,verbose=False,auth=None):
     
     if verbose:
         print('Trying',url+page,'params=',{'pos':pos,'size':size})
-    r=requests.get(url+page,params={'pos':pos,'size':size},auth=auth)
-    if r.status_code==200:
-        with open(outfile,'wb') as o:
-            o.write(r.content)
-        r.close()
-    else:
+    r=requests.get(url+page,params={'pos':pos,'size':size},auth=auth,stream=True)
+    if verbose:
+        print('received response code',r.status_code,'and content type',r.headers['content-type'])
+    if r.status_code!=200:
         raise RuntimeError('Status code %i returned' % r.status_code)
+    if r.headers['content-type']!='application/fits':
+        raise RuntimeError('Server did not return FITS file, probably no coverage of this area')
+
+    with open(outfile,'wb') as o:
+        o.write(r.content)
+        r.close()
+
 
 if __name__=='__main__':
     # Example code using a list of target names supplied on the command line
