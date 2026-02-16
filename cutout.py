@@ -1,10 +1,10 @@
 import requests
 import sys
 
-def get_cutout(outfile,pos,size=30,low=False,dr3=False,verbose=False,auth=None):
+def get_cutout(outfile,pos,size=30,low=False,dr3=True,verbose=False,auth=None):
     '''Get a cutout at position pos with size size arcmin. If low is
     True, get the 20-arcsec cutout, else get the 6-arcsec one. If dr3
-    is true, try to access the DR3 data instead. Save to outfile.
+    is true, try to access the DR3 data, else use DR2.
 
     '''
     base='dr3' if dr3 else 'dr2'
@@ -35,4 +35,4 @@ if __name__=='__main__':
     objects=[l.rstrip() for l in open(infile).readlines()]
     for oname in objects:
         print('Downloading image for',oname)
-        get_cutout(oname+'.fits',oname,low=True)
+        get_cutout(oname+'.fits',oname,low=False)
